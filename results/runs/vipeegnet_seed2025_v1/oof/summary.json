@@ -1,0 +1,56 @@
+{
+  "model": "VIPEEGNet",
+  "recipe": "Sunyuri VIPEEGNet \u2014 2-stage, EffV2B3, SumToOne Conv1D. Native: no TTA, no temperature.",
+  "n_folds": 5,
+  "batch_size": 16,
+  "stages": [
+    15,
+    5
+  ],
+  "seed": 2025,
+  "fair_splits": "GroupKFold(5) on dedup df",
+  "oof_kld_all": 0.580664336681366,
+  "tta": "none",
+  "tf_version": "2.19.0",
+  "per_fold": [
+    {
+      "fold": 0,
+      "n_valid_hq": 1376,
+      "kld_hq_native": 0.22130616009235382,
+      "kld_hq_raw": 0.22130616009235382,
+      "temperature": 1.0
+    },
+    {
+      "fold": 1,
+      "n_valid_hq": 1228,
+      "kld_hq_native": 0.2230197787284851,
+      "kld_hq_raw": 0.2230197787284851,
+      "temperature": 1.0
+    },
+    {
+      "fold": 2,
+      "n_valid_hq": 1229,
+      "kld_hq_native": 0.23217560350894928,
+      "kld_hq_raw": 0.23217560350894928,
+      "temperature": 1.0
+    },
+    {
+      "fold": 3,
+      "n_valid_hq": 1155,
+      "kld_hq_native": 0.24151231348514557,
+      "kld_hq_raw": 0.24151231348514557,
+      "temperature": 1.0
+    },
+    {
+      "fold": 4,
+      "n_valid_hq": 1362,
+      "kld_hq_native": 0.2042398601770401,
+      "kld_hq_raw": 0.2042398601770401,
+      "temperature": 1.0
+    }
+  ],
+  "oof_kld_hq_native": 0.22375603020191193,
+  "oof_kld_hq_raw": 0.22375603020191193,
+  "mean_fold_kld_hq": 0.22445074319839478,
+  "n_oof_hq": 6350
+}

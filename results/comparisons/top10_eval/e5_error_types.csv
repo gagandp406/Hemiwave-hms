@@ -1,0 +1,29 @@
+model,error type,count,"per 1,000 EEGs"
+VIPEEGNet,missed seizure,122,19.212598425196852
+VIPEEGNet,false seizure alarm,74,11.653543307086613
+VIPEEGNet,harmful pattern called Other,684,107.71653543307087
+VIPEEGNet,Other called a harmful pattern,332,52.28346456692914
+VIPEEGNet,"right pattern, wrong side (L vs G)",86,13.543307086614174
+VIPEEGNet,periodic vs rhythmic mix-up,147,23.1496062992126
+VIPEEGNet,all errors,1445,227.55905511811022
+EfficientNetB0,missed seizure,52,8.188976377952757
+EfficientNetB0,false seizure alarm,563,88.66141732283464
+EfficientNetB0,harmful pattern called Other,547,86.14173228346456
+EfficientNetB0,Other called a harmful pattern,550,86.61417322834646
+EfficientNetB0,"right pattern, wrong side (L vs G)",216,34.01574803149606
+EfficientNetB0,periodic vs rhythmic mix-up,146,22.992125984251967
+EfficientNetB0,all errors,2074,326.6141732283465
+PRISM,missed seizure,130,20.47244094488189
+PRISM,false seizure alarm,101,15.90551181102362
+PRISM,harmful pattern called Other,836,131.6535433070866
+PRISM,Other called a harmful pattern,302,47.55905511811023
+PRISM,"right pattern, wrong side (L vs G)",107,16.850393700787404
+PRISM,periodic vs rhythmic mix-up,123,19.370078740157478
+PRISM,all errors,1599,251.81102362204726
+VIPEEGNet + PRISM,missed seizure,120,18.89763779527559
+VIPEEGNet + PRISM,false seizure alarm,73,11.496062992125983
+VIPEEGNet + PRISM,harmful pattern called Other,715,112.5984251968504
+VIPEEGNet + PRISM,Other called a harmful pattern,285,44.881889763779526
+VIPEEGNet + PRISM,"right pattern, wrong side (L vs G)",85,13.385826771653543
+VIPEEGNet + PRISM,periodic vs rhythmic mix-up,131,20.62992125984252
+VIPEEGNet + PRISM,all errors,1409,221.88976377952758

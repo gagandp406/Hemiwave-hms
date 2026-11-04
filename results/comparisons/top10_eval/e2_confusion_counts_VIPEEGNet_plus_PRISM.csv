@@ -1,0 +1,7 @@
+,pred Seizure,pred LPD,pred GPD,pred LRDA,pred GRDA,pred Other
+true Seizure,159,30,37,11,2,40
+true LPD,14,983,28,25,6,239
+true GPD,23,36,620,0,15,112
+true LRDA,7,59,0,137,15,143
+true GRDA,3,7,19,6,191,221
+true Other,26,121,59,45,60,2851

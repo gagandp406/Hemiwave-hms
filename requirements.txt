@@ -1,0 +1,15 @@
+# Same TF version as the reference run (TF 2.19.0 / Keras 3). [and-cuda] pulls CUDA 12 + cuDNN 9 wheels,
+# so no system CUDA toolkit is needed — only an NVIDIA driver >= 525.
+tensorflow[and-cuda]==2.19.0
+numpy
+pandas
+pyarrow
+scipy
+scikit-learn
+matplotlib
+seaborn
+tqdm
+joblib
+ipykernel
+papermill
+kaggle

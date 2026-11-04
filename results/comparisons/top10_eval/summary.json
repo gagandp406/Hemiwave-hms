@@ -1,0 +1,112 @@
+{
+  "models": [
+    [
+      "vipeegnet_groupkfold_v1",
+      "VIPEEGNet"
+    ],
+    [
+      "effnetb0_native_v1",
+      "EfficientNetB0"
+    ],
+    [
+      "prism_wf5_tta_v1",
+      "PRISM"
+    ],
+    [
+      "blend_vip_prism_wf5_v1",
+      "VIPEEGNet + PRISM"
+    ]
+  ],
+  "n_rows": 6350,
+  "n_patients": 1063,
+  "scorecard": [
+    {
+      "index": "1 KLD (lower better)",
+      "VIPEEGNet": 0.221670463681221,
+      "EfficientNetB0": 0.46479594707489014,
+      "PRISM": 0.2732463479042053,
+      "VIPEEGNet + PRISM": 0.21771365404129028,
+      "best": "VIPEEGNet + PRISM"
+    },
+    {
+      "index": "2 macro-F1 % (higher better)",
+      "VIPEEGNet": 66.26281831777513,
+      "EfficientNetB0": 55.58270318632415,
+      "PRISM": 62.5267664285296,
+      "VIPEEGNet + PRISM": 66.98802452800966,
+      "best": "VIPEEGNet + PRISM"
+    },
+    {
+      "index": "3 macro-AUPRC (higher better)",
+      "VIPEEGNet": 0.7589364822880258,
+      "EfficientNetB0": 0.5935747623771969,
+      "PRISM": 0.6977238997142319,
+      "VIPEEGNet + PRISM": 0.7633232566598651,
+      "best": "VIPEEGNet + PRISM"
+    },
+    {
+      "index": "4 harmful-vs-Other AUROC (higher better)",
+      "VIPEEGNet": 0.9290863429194076,
+      "EfficientNetB0": 0.8740796051289743,
+      "PRISM": 0.9124813401298515,
+      "VIPEEGNet + PRISM": 0.9307176183299644,
+      "best": "VIPEEGNet + PRISM"
+    },
+    {
+      "index": "5 errors per 1,000 EEGs (lower better)",
+      "VIPEEGNet": 227.55905511811022,
+      "EfficientNetB0": 326.6141732283465,
+      "PRISM": 251.81102362204726,
+      "VIPEEGNet + PRISM": 221.88976377952758,
+      "best": "VIPEEGNet + PRISM"
+    },
+    {
+      "index": "5b seizure errors per 1,000 EEGs, missed + false alarms (lower better)",
+      "VIPEEGNet": 30.866141732283467,
+      "EfficientNetB0": 96.8503937007874,
+      "PRISM": 36.37795275590551,
+      "VIPEEGNet + PRISM": 30.39370078740157,
+      "best": "VIPEEGNet + PRISM"
+    },
+    {
+      "index": "6 seizure specificity % at 90% sensitivity (higher better)",
+      "VIPEEGNet": 92.86773183989459,
+      "EfficientNetB0": 85.85076593641904,
+      "PRISM": 90.80876297150387,
+      "VIPEEGNet + PRISM": 93.29599736451985,
+      "best": "VIPEEGNet + PRISM"
+    },
+    {
+      "index": "7 class-wise ECE vs vote shares (lower better)",
+      "VIPEEGNet": 0.006102916996657298,
+      "EfficientNetB0": 0.04482068950051549,
+      "PRISM": 0.014947152969526539,
+      "VIPEEGNet + PRISM": 0.0074409119489756105,
+      "best": "VIPEEGNet"
+    },
+    {
+      "index": "8 agreement with expert panel % (higher better)",
+      "VIPEEGNet": 77.84638868653917,
+      "EfficientNetB0": 67.13201699022561,
+      "PRISM": 75.41945286118393,
+      "VIPEEGNet + PRISM": 78.36219353875555,
+      "best": "VIPEEGNet + PRISM"
+    },
+    {
+      "index": "9 KLD on split-vote EEGs (lower better)",
+      "VIPEEGNet": 0.2791076898574829,
+      "EfficientNetB0": 0.5852328538894653,
+      "PRISM": 0.3454636037349701,
+      "VIPEEGNet + PRISM": 0.2745220959186554,
+      "best": "VIPEEGNet + PRISM"
+    },
+    {
+      "index": "10 worst-decile patient KLD (lower better)",
+      "VIPEEGNet": 0.3949588537216187,
+      "EfficientNetB0": 1.0243951559066775,
+      "PRISM": 0.4783003509044648,
+      "VIPEEGNet + PRISM": 0.38054317831993106,
+      "best": "VIPEEGNet + PRISM"
+    }
+  ]
+}

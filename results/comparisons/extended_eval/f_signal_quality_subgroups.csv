@@ -1,0 +1,49 @@
+grouping,level,n,model,KLD,accuracy %
+flat or missing channels,none,6331,VIPEEGNet,0.22142197,77.22318749012794
+flat or missing channels,none,6331,EfficientNetB0,0.46474287,67.335334070447
+flat or missing channels,none,6331,PRISM,0.27318892,74.77491707471174
+flat or missing channels,none,6331,VIPEEGNet + PRISM,0.2175028,77.79181803822462
+flat or missing channels,1,6,VIPEEGNet,0.20283979,66.66666666666666
+flat or missing channels,1,6,EfficientNetB0,0.40722704,50.0
+flat or missing channels,1,6,PRISM,0.18553387,83.33333333333334
+flat or missing channels,1,6,VIPEEGNet + PRISM,0.18614392,66.66666666666666
+flat or missing channels,2+,13,VIPEEGNet,0.35136387,92.3076923076923
+flat or missing channels,2+,13,EfficientNetB0,0.517213,76.92307692307693
+flat or missing channels,2+,13,PRISM,0.34168726,92.3076923076923
+flat or missing channels,2+,13,VIPEEGNet + PRISM,0.33497566,92.3076923076923
+artifact amplitude (tertile),low,2117,VIPEEGNet,0.20280582,80.58573452999528
+artifact amplitude (tertile),low,2117,EfficientNetB0,0.42021567,71.46905999055267
+artifact amplitude (tertile),low,2117,PRISM,0.26316452,76.9485120453472
+artifact amplitude (tertile),low,2117,VIPEEGNet + PRISM,0.20026095,80.63297118564006
+artifact amplitude (tertile),middle,2116,VIPEEGNet,0.22460306,74.66918714555766
+artifact amplitude (tertile),middle,2116,EfficientNetB0,0.45053193,65.92627599243856
+artifact amplitude (tertile),middle,2116,PRISM,0.26864266,72.63705103969754
+artifact amplitude (tertile),middle,2116,VIPEEGNet + PRISM,0.21978171,75.66162570888469
+artifact amplitude (tertile),high,2117,VIPEEGNet,0.23760389,76.47614548889938
+artifact amplitude (tertile),high,2117,EfficientNetB0,0.5236335,64.61974492205952
+artifact amplitude (tertile),high,2117,PRISM,0.28792968,74.87009919697685
+artifact amplitude (tertile),high,2117,VIPEEGNet + PRISM,0.2330993,77.13745866792631
+recording length (tertile),short,2117,VIPEEGNet,0.18888058,84.6008502598016
+recording length (tertile),short,2117,EfficientNetB0,0.38787574,75.0118091639112
+recording length (tertile),short,2117,PRISM,0.24037226,82.0028341993387
+recording length (tertile),short,2117,VIPEEGNet + PRISM,0.18599935,84.45914029286726
+recording length (tertile),middle,2116,VIPEEGNet,0.22390425,77.03213610586012
+recording length (tertile),middle,2116,EfficientNetB0,0.46391872,67.10775047258979
+recording length (tertile),middle,2116,PRISM,0.26830858,75.0945179584121
+recording length (tertile),middle,2116,VIPEEGNet + PRISM,0.21795039,77.7882797731569
+recording length (tertile),long,2117,VIPEEGNet,0.2522276,70.09919697685405
+recording length (tertile),long,2117,EfficientNetB0,0.5425929,59.89607935758149
+recording length (tertile),long,2117,PRISM,0.3110558,67.35947094945678
+recording length (tertile),long,2117,VIPEEGNet + PRISM,0.24919134,71.18564005668398
+stationary period,1 window,1334,VIPEEGNet,0.20180899,82.00899550224887
+stationary period,1 window,1334,EfficientNetB0,0.42729816,73.16341829085458
+stationary period,1 window,1334,PRISM,0.2603329,77.96101949025487
+stationary period,1 window,1334,VIPEEGNet + PRISM,0.19882894,82.00899550224887
+stationary period,2-5,3099,VIPEEGNet,0.21214858,78.34785414649888
+stationary period,2-5,3099,EfficientNetB0,0.46106106,67.95740561471443
+stationary period,2-5,3099,PRISM,0.26148358,77.60567925137141
+stationary period,2-5,3099,VIPEEGNet + PRISM,0.20768759,79.09002904162634
+stationary period,6+,1917,VIPEEGNet,0.2508846,72.14397496087636
+stationary period,6+,1917,EfficientNetB0,0.49692762,62.284820031298906
+stationary period,6+,1917,PRISM,0.301248,68.12728221178925
+stationary period,6+,1917,VIPEEGNet + PRISM,0.24706317,72.82211789254043

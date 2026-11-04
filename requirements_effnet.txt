@@ -1,0 +1,16 @@
+# Keras-2 environment for Chris Deotte's EfficientNetB0 starter (efficientnet pkg needs Keras 2).
+# TF 2.15 is the TF generation Kaggle ran in early 2024. Pins keep NumPy 1.x-compatible wheels.
+tensorflow[and-cuda]==2.15.1
+efficientnet==1.1.1
+numpy==1.26.4
+pandas==2.2.3
+pyarrow==17.0.0
+scipy==1.13.1
+scikit-learn==1.5.2
+librosa==0.10.1
+matplotlib==3.9.2
+seaborn==0.13.2
+tqdm
+joblib
+ipykernel
+papermill

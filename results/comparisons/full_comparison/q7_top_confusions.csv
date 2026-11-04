@@ -1,0 +1,11 @@
+model,#1 confusion,#2 confusion,#3 confusion
+VIPEEGNet (seed 2024),LPD -> Other (225),GRDA -> Other (215),LRDA -> Other (136)
+VIPEEGNet (seed 2025),LPD -> Other (223),GRDA -> Other (216),LRDA -> Other (145)
+VIPEEGNet (seed 2026),GRDA -> Other (217),LPD -> Other (206),LRDA -> Other (144)
+PRISM,LPD -> Other (279),GRDA -> Other (220),LRDA -> Other (179)
+EfficientNetB0,Other -> Seizure (268),Other -> GRDA (245),LPD -> Other (221)
+VIPEEGNet ×2,GRDA -> Other (224),LPD -> Other (222),LRDA -> Other (136)
+VIPEEGNet ×3,GRDA -> Other (226),LPD -> Other (213),LRDA -> Other (139)
+VIPEEGNet + PRISM,LPD -> Other (239),GRDA -> Other (221),LRDA -> Other (143)
+VIPEEGNet ×2 + PRISM,LPD -> Other (234),GRDA -> Other (230),LRDA -> Other (151)
+VIPEEGNet ×3 + PRISM,GRDA -> Other (231),LPD -> Other (219),LRDA -> Other (150)

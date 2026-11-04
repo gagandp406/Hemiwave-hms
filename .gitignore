@@ -1,0 +1,32 @@
+# ---- data, caches, model weights (never commit) ----
+hms-data/
+eeg_cache*/
+*.zip
+*.h5
+*.keras
+*.pt
+*.pth
+*.ckpt
+*.npy
+weights/
+
+# ---- out-of-fold predictions (delete this line to commit them; ~15 MB) ----
+*.npz
+
+# ---- environments and editor files ----
+.venv*/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.DS_Store
+
+# ---- secrets ----
+kaggle.json
+.kaggle/
+.env
+*.pem
+
+# ---- working outputs that live in the project directory, not the repo ----
+/fair_comparison/
+/runs/
+*.log

@@ -1,0 +1,22 @@
+{
+ "model": "VIPEEGNet + PRISM blend",
+ "prism_run": "prism_wf5_tta",
+ "kind": "geo",
+ "weights_on_prism": [
+  0.2,
+  0.2,
+  0.2,
+  0.2,
+  0.2
+ ],
+ "weight_selection": "leave-one-fold-out",
+ "oof_kld_hq": 0.21771365404129028,
+ "oof_kld_hq_raw": 0.21771365404129028,
+ "vip_kld_hq": 0.221670463681221,
+ "prism_kld_hq": 0.2732463479042053,
+ "gain_ci95_patient": [
+  0.0023027900526263793,
+  0.0056078427416186094
+ ],
+ "n_oof_hq": 6350
+}

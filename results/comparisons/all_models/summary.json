@@ -1,0 +1,88 @@
+{
+  "reference": "VIPEEGNet",
+  "models": [
+    [
+      "vipeegnet_groupkfold_v1",
+      "VIPEEGNet"
+    ],
+    [
+      "effnetb0_native_v1",
+      "EfficientNetB0"
+    ],
+    [
+      "prism_wf5_v1",
+      "PRISM"
+    ],
+    [
+      "prism_wf5_tta_v1",
+      "PRISM + TTA"
+    ],
+    [
+      "blend_vip_prism_wf5_v1",
+      "VIPEEGNet + PRISM blend"
+    ]
+  ],
+  "n_rows_hq": 6350,
+  "kld": [
+    {
+      "model": "VIPEEGNet",
+      "KLD": 0.221670463681221,
+      "CI low": 0.21201245465220578,
+      "CI high": 0.23201597659039055,
+      "vs VIPEEGNet": 0.0,
+      "diff CI low": 0.0,
+      "diff CI high": 0.0,
+      "P(better than ref)": 0.0,
+      "rows better %": 0.0,
+      "KLD all rows": 0.5794306993484497
+    },
+    {
+      "model": "EfficientNetB0",
+      "KLD": 0.46479594707489014,
+      "CI low": 0.4391253659137767,
+      "CI high": 0.4911423946027175,
+      "vs VIPEEGNet": 0.24312548339366913,
+      "diff CI low": 0.21956726308123575,
+      "diff CI high": 0.2664417447516394,
+      "P(better than ref)": 0.0,
+      "rows better %": 27.826771653543307,
+      "KLD all rows": 0.6124966144561768
+    },
+    {
+      "model": "PRISM",
+      "KLD": 0.2743544578552246,
+      "CI low": 0.2602186071748947,
+      "CI high": 0.2888593551527856,
+      "vs VIPEEGNet": 0.0526839941740036,
+      "diff CI low": 0.042340609203695374,
+      "diff CI high": 0.06476987001764142,
+      "P(better than ref)": 0.0,
+      "rows better %": 40.330708661417326,
+      "KLD all rows": 0.6475957036018372
+    },
+    {
+      "model": "PRISM + TTA",
+      "KLD": 0.2732463479042053,
+      "CI low": 0.2592387534229878,
+      "CI high": 0.287724662650004,
+      "vs VIPEEGNet": 0.051575884222984314,
+      "diff CI low": 0.04115157129604521,
+      "diff CI high": 0.06375894271986457,
+      "P(better than ref)": 0.0,
+      "rows better %": 40.25196850393701,
+      "KLD all rows": 0.6447064876556396
+    },
+    {
+      "model": "VIPEEGNet + PRISM blend",
+      "KLD": 0.21771365404129028,
+      "CI low": 0.2081850670202098,
+      "CI high": 0.22774731131854364,
+      "vs VIPEEGNet": -0.003956809639930725,
+      "diff CI low": -0.005607840166726671,
+      "diff CI high": -0.0023027893880158603,
+      "P(better than ref)": 1.0,
+      "rows better %": 54.23622047244094,
+      "KLD all rows": NaN
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "models": [
+    "VIPEEGNet (seed 2024)",
+    "VIPEEGNet (seed 2025)",
+    "VIPEEGNet (seed 2026)",
+    "PRISM",
+    "EfficientNetB0",
+    "VIPEEGNet \u00d72",
+    "VIPEEGNet \u00d73",
+    "VIPEEGNet + PRISM",
+    "VIPEEGNet \u00d72 + PRISM",
+    "VIPEEGNet \u00d73 + PRISM"
+  ],
+  "members": {
+    "VIPEEGNet (seed 2024)": {
+      "VIPEEGNet": 1
+    },
+    "VIPEEGNet (seed 2025)": {
+      "VIPEEGNet": 1
+    },
+    "VIPEEGNet (seed 2026)": {
+      "VIPEEGNet": 1
+    },
+    "PRISM": {
+      "PRISM": 1
+    },
+    "EfficientNetB0": {
+      "EfficientNetB0": 1
+    },
+    "VIPEEGNet \u00d72": {
+      "VIPEEGNet": 2
+    },
+    "VIPEEGNet \u00d73": {
+      "VIPEEGNet": 3
+    },
+    "VIPEEGNet + PRISM": {
+      "VIPEEGNet": 1,
+      "PRISM": 1
+    },
+    "VIPEEGNet \u00d72 + PRISM": {
+      "VIPEEGNet": 2,
+      "PRISM": 1
+    },
+    "VIPEEGNet \u00d73 + PRISM": {
+      "VIPEEGNet": 3,
+      "PRISM": 1
+    }
+  },
+  "blend_weights": {
+    "VIPEEGNet + PRISM": [
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2
+    ],
+    "VIPEEGNet \u00d72 + PRISM": [
+      0.15,
+      0.15,
+      0.15,
+      0.15,
+      0.15
+    ],
+    "VIPEEGNet \u00d73 + PRISM": [
+      0.15,
+      0.15,
+      0.1,
+      0.15,
+      0.15
+    ]
+  },
+  "answers": [
+    "**Q1.** Lowest KLD: VIPEEGNet \u00d73 + PRISM (0.2131) vs VIPEEGNet (seed 2024) 0.2217 and VIPEEGNet \u00d73 0.2145. Real vs VIPEEGNet \u00d73: True (difference -0.0014, CI -0.0024 to -0.0004).",
+    "**Q2.** KLD varies by SD 0.0013 (range 0.0022) across 3 seeds; accuracy by SD 0.20 points. Differences smaller than about two SDs are within seed luck.",
+    "**Q3.** Seizure (prevalence 4.4%): AUROC 0.937-0.976 across models, but AUPRC only 0.408-0.728; best AUPRC VIPEEGNet + PRISM. Largest AUROC-AUPRC gap: LRDA. Targets where the AUPRC winner differs from the AUROC winner: ['GRDA', 'Other'].",
+    "**Q4.** At 90% seizure recall: VIPEEGNet + PRISM raises 6.4 false alarms per 100 EEGs vs 6.8 for VIPEEGNet (seed 2024) and 13.5 for EfficientNetB0. For harmful-vs-Other at 90% recall: 10.8 (VIPEEGNet \u00d73 + PRISM) to 16.7 per 100 EEGs.",
+    "**Q5.** Best calibrated: VIPEEGNet \u00d73 (class-wise ECE 0.0060); worst: EfficientNetB0 (0.0448). Seizure slope ranges 0.39-0.97.",
+    "**Q6.** A seizure threshold set for 90% recall on other patients catches 89.8-91.6% on new patients on average; the worst cohort drops to 76.6% (VIPEEGNet (seed 2025)). Most stable seizure threshold (lowest relative drift): EfficientNetB0.",
+    "**Q7.** Most common failure for VIPEEGNet (seed 2024): \"harmful pattern called Other\" (108 per 1,000). Fewest errors overall: VIPEEGNet \u00d73 (220/1,000); fewest confident errors: VIPEEGNet \u00d72 (15.0/1,000).",
+    "**Q8.** On split-vote EEGs (n=1291) the best is VIPEEGNet \u00d73 + PRISM (KLD 0.2676); VIPEEGNet (seed 2024) 0.2791. Uncertainty tracks expert disagreement best for VIPEEGNet \u00d73 + PRISM (rho 0.741); experts' top-2 reproduced in up to 70.4% of two-way cases.",
+    "**Q9.** Best worst-fold floor: VIPEEGNet \u00d73 + PRISM (0.2259); VIPEEGNet (seed 2024) worst fold 0.2319. Patients with KLD > 0.5: 4.9% (VIPEEGNet + PRISM) to 33.4%. When VIPEEGNet (seed 2024) is >=80% confident it is right 98.3% of the time.",
+    "**Q10.** VIPEEGNet seeds correlate with each other at r=0.913; PRISM vs VIPEEGNet (seed 2024) r=0.676; EfficientNetB0 vs VIPEEGNet (seed 2024) r=0.410. Lower r = more complementary errors.",
+    "**Q11.** Largest gain per extra member: VIPEEGNet \u00d72 (0.0055); largest gain per extra 10M parameters: VIPEEGNet + PRISM (0.0134).",
+    "**Verdict.** Most question wins: VIPEEGNet \u00d73 + PRISM (5 of 14). VIPEEGNet \u00d73 + PRISM vs VIPEEGNet \u00d73: KLD -0.0014 (CI -0.0024 to -0.0004), macro-AUPRC +0.0020 (CI 0.0001 to 0.0043). Single-model ranking by KLD: VIPEEGNet (seed 2024) < VIPEEGNet (seed 2025) < VIPEEGNet (seed 2026) < PRISM < EfficientNetB0."
+  ]
+}
