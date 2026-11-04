@@ -11,7 +11,7 @@ python -m pip install --upgrade pip wheel
 python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu124
 python -m pip install "timm==1.0.11" "huggingface_hub==0.26.2" safetensors "numpy<2" pandas pyarrow scipy scikit-learn tqdm matplotlib seaborn ipykernel papermill
 python -m ipykernel install --user --name hms-torch --display-name "Python (hms-torch)"
-cp -f "$HERE"/prism.py "$HERE"/prism_train.py "$HERE"/PRISM_EEG.ipynb "$P"/
+cp -f "$HERE"/../hemiwave/prism.py "$HERE"/../hemiwave/prism_train.py "$HERE"/../hemiwave/PRISM_EEG.ipynb "$P"/
 python - <<'PY'
 import torch, timm
 print('torch', torch.__version__, '| CUDA', torch.cuda.is_available(), torch.cuda.get_device_name(0) if torch.cuda.is_available() else '')

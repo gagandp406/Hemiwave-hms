@@ -21,7 +21,7 @@ source "$VENV/bin/activate"
 python -m pip install --upgrade pip wheel
 python -m pip install -r "$HERE/requirements.txt"
 python -m ipykernel install --user --name hms-vipeegnet --display-name "Python (hms-vipeegnet)"
-cp -n "$HERE"/VIPEEGNet_local.ipynb "$HERE"/VIPEEGNet_kaggle_inference.ipynb "$PROJECT_DIR"/ || true
+cp -n "$HERE"/../reference/VIPEEGNet_local.ipynb "$HERE"/VIPEEGNet_kaggle_inference.ipynb "$PROJECT_DIR"/ || true
 python - <<'PY'
 import tensorflow as tf
 g = tf.config.list_physical_devices('GPU')

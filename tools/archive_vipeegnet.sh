@@ -13,8 +13,8 @@ cp "$P"/vipeegnet/output/fold*_stage*.weights.h5 "$A/weights/"
 cp "$P"/vipeegnet/output/*_log.csv "$P"/vipeegnet/output/confusion.png "$A/logs/"
 cp "$(ls -t "$P"/runs/full_*.ipynb | head -1)" "$A/logs/executed_full_run.ipynb"
 cp "$(ls -t "$P"/runs/full_*.log   | head -1)" "$A/logs/full_run.log"
-cp "$P"/VIPEEGNet_local.ipynb "$P"/VIPEEGNet_kaggle_inference.ipynb "$A/code/"
-cp "$(dirname "$0")"/*.sh "$(dirname "$0")"/*.py "$(dirname "$0")"/requirements.txt "$A/code/" 2>/dev/null || true
+cp "$P"/VIPEEGNet_local.ipynb "$A/code/"; cp "$P"/VIPEEGNet_kaggle_inference.ipynb "$A/code/" 2>/dev/null || true
+R="$(cd "$(dirname "$0")/.." && pwd)"; (cd "$R" && find setup hemiwave reference baselines ensemble evaluation tools -type f \( -name "*.sh" -o -name "*.py" -o -name "*.ipynb" -o -name "requirements*.txt" \) -exec cp --parents {} "$A/code/" \;) 2>/dev/null || true
 pip freeze > "$A/env/pip_freeze.txt"
 nvidia-smi > "$A/env/nvidia_smi.txt"
 python -c "import tensorflow as tf, sys; print('python', sys.version); print('tf', tf.__version__)" > "$A/env/versions.txt" 2>/dev/null

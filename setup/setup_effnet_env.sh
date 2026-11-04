@@ -14,7 +14,7 @@ source "$VENV/bin/activate"
 python -m pip install --upgrade pip wheel
 python -m pip install -r "$HERE/requirements_effnet.txt"
 python -m ipykernel install --user --name hms-effnet --display-name "Python (hms-effnet)"
-cp -n "$HERE"/EffNetB0_local.ipynb "$HERE"/compare_models.ipynb "$P"/ 2>/dev/null || true
+cp -n "$HERE"/../baselines/effnetb0/EffNetB0_local.ipynb "$HERE"/../evaluation/compare_models.ipynb "$P"/ 2>/dev/null || true
 
 # ImageNet (AutoAugment) weights used by efficientnet 1.1.1 'imagenet' = what Chris loaded
 mkdir -p "$P/pretrained"

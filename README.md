@@ -6,7 +6,7 @@ Gagandeep Singh, Iman Dehzangi — Department of Computer Science, Rutgers Unive
 
 This repository holds the code and result summaries for the HemiWave paper (submitted to *IEEE Journal of Biomedical and Health Informatics*). It classifies 50-s EEG segments into six classes (Seizure, LPD, GPD, LRDA, GRDA, Other) and predicts the distribution of expert votes.
 
-> **Naming:** the model is called **HemiWave** in the paper and **PRISM** in the code (`prism.py`, `PRISM_EEG.ipynb`, run tags such as `prism_wf5`). They are the same model; the code names were kept so that archived results and run tags stay valid.
+> **Naming:** the model is called **HemiWave** in the paper and **PRISM** in the code (`hemiwave/prism.py`, `hemiwave/PRISM_EEG.ipynb`, run tags such as `prism_wf5`). They are the same model; the code names were kept so that archived results and run tags stay valid.
 
 ## Main results
 
@@ -29,31 +29,38 @@ Full reports: [`results/comparisons/full_comparison/report.md`](results/comparis
 
 ## Method in brief
 
-- **HemiWave** (`prism.py`): a shared 1-D residual encoder reads each of the 18 bipolar channels; learned autocorrelation tokens capture periodicity; homologous left/right channels are fused as (L+R)/2 and |L−R|, which makes the output exactly invariant to swapping the hemispheres; a 2-layer transformer models change over the 50-s window. 2.96 M parameters.
-- **Reference classifier** (`VIPEEGNet_local.ipynb`): our re-implementation of the image-based classifier of Sun et al. (*npj Digit. Med.* 8:768, 2025), trained with three random seeds.
-- **Ensemble** (`blend_5fold.py`, `full_comparison.ipynb`): reference instances are averaged, then blended with HemiWave by a weighted geometric mean. The single weight is chosen leave-one-fold-out, so it never sees the labels of the fold it is applied to.
+- **HemiWave** (`hemiwave/prism.py`): a shared 1-D residual encoder reads each of the 18 bipolar channels; learned autocorrelation tokens capture periodicity; homologous left/right channels are fused as (L+R)/2 and |L−R|, which makes the output exactly invariant to swapping the hemispheres; a 2-layer transformer models change over the 50-s window. 2.96 M parameters.
+- **Reference classifier** (`reference/VIPEEGNet_local.ipynb`): our re-implementation of the image-based classifier of Sun et al. (*npj Digit. Med.* 8:768, 2025), trained with three random seeds.
+- **Ensemble** (`ensemble/blend_5fold.py`, `evaluation/full_comparison.ipynb`): reference instances are averaged, then blended with HemiWave by a weighted geometric mean. The single weight is chosen leave-one-fold-out, so it never sees the labels of the fold it is applied to.
 
 ## Repository layout
 
 ```
 .
-├── setup.sh, setup_torch_env.sh, setup_effnet_env.sh   environments (no sudo needed)
-├── download_data.sh, requirements*.txt                 data download and Python packages
-├── prism.py, prism_train.py, PRISM_EEG.ipynb           HemiWave model, training loop, run notebook
-├── run_prism.sh                                        HemiWave runs (fold-0 screens, final 5-fold run)
-├── VIPEEGNet_local.ipynb, run_vipeegnet.sh             reference classifier (3 seeds)
-├── EffNetB0_local.ipynb, run_effnet.sh                 EfficientNet-B0 spectrogram baseline (supplementary)
-├── blend_fold0.py, blend_5fold.py                      ensemble weight selection and blending
-├── compare_models.ipynb, compare_all_models.ipynb      model comparisons
-├── eval_top10.ipynb, eval_extended.ipynb               clinical and statistical evaluations
-├── full_comparison.ipynb                               final comparison of all models and ensembles (paper numbers)
-├── export_full_oof.py, load_results.py                 out-of-fold export and loader
-├── archive_run.sh, archive_vipeegnet.sh                freeze a finished run (read-only, checksummed)
-├── experiments/                                        exploratory code not used in the paper (CORAL, TTA, checks)
+├── README.md
+├── sync_to_project.sh        copies notebooks and modules into the project directory before a run
+├── setup/                    environments, data download and package lists
+│   ├── setup.sh, setup_torch_env.sh, setup_effnet_env.sh
+│   ├── download_data.sh
+│   └── requirements.txt, requirements_effnet.txt
+├── hemiwave/                 HemiWave model (PRISM in code)
+│   ├── prism.py              architecture
+│   ├── prism_train.py        training and evaluation loop
+│   ├── PRISM_EEG.ipynb       run notebook
+│   └── run_prism.sh          fold-0 development runs and the final 5-fold run
+├── reference/                reference classifier (re-implementation of Sun et al.)
+│   ├── VIPEEGNet_local.ipynb
+│   └── run_vipeegnet.sh      three training seeds
+├── baselines/effnetb0/       EfficientNet-B0 spectrogram baseline (supplementary)
+├── ensemble/                 blend weight selection and blending (blend_fold0.py, blend_5fold.py)
+├── evaluation/               comparison and evaluation notebooks, load_results.py
+│   └── full_comparison.ipynb produces the numbers reported in the paper
+├── tools/                    archive_run.sh, archive_vipeegnet.sh, export_full_oof.py
+├── experiments/              exploratory code not used in the paper (CORAL, TTA, checks)
 └── results/
-    ├── comparisons/        reports, CSV tables and figures from each evaluation notebook
-    ├── runs/<run>/         per-run summary, patient folds, training curves, environment
-    └── executed_notebooks/ executed copies of the notebooks behind the reported numbers
+    ├── comparisons/          reports, CSV tables and figures from each evaluation notebook
+    ├── runs/<run>/           per-run summary, patient folds, training curves, environment
+    └── executed_notebooks/   executed copies of the notebooks behind the reported numbers
 ```
 
 ## Environment and setup
@@ -78,16 +85,16 @@ Each model family has its own virtual environment and Jupyter kernel, because th
 
 | Environment | Created by | Jupyter kernel | Main packages | Used for |
 |---|---|---|---|---|
-| `.venv` | `setup.sh` | `hms-vipeegnet` | TensorFlow 2.19.0 `[and-cuda]` (Keras 3), NumPy, pandas, scikit-learn, papermill, Kaggle CLI | data download, reference classifier (3 seeds), EEG cache |
-| `.venv-torch` | `setup_torch_env.sh` | `hms-torch` | PyTorch 2.5.1 (CUDA 12.4 wheels), timm 1.0.11, huggingface_hub 0.26.2, NumPy < 2, pandas, SciPy, scikit-learn, matplotlib, seaborn, papermill | HemiWave, ensemble blending, all evaluation notebooks |
-| `.venv-tf215` | `setup_effnet_env.sh` | `hms-effnet` | TensorFlow 2.15.1 `[and-cuda]` (Keras 2), efficientnet 1.1.1, NumPy 1.26.4, pandas 2.2.3, librosa 0.10.1, setuptools < 81 | EfficientNet-B0 baseline (supplementary) |
+| `.venv` | `setup/setup.sh` | `hms-vipeegnet` | TensorFlow 2.19.0 `[and-cuda]` (Keras 3), NumPy, pandas, scikit-learn, papermill, Kaggle CLI | data download, reference classifier (3 seeds), EEG cache |
+| `.venv-torch` | `setup/setup_torch_env.sh` | `hms-torch` | PyTorch 2.5.1 (CUDA 12.4 wheels), timm 1.0.11, huggingface_hub 0.26.2, NumPy < 2, pandas, SciPy, scikit-learn, matplotlib, seaborn, papermill | HemiWave, ensemble blending, all evaluation notebooks |
+| `.venv-tf215` | `setup/setup_effnet_env.sh` | `hms-effnet` | TensorFlow 2.15.1 `[and-cuda]` (Keras 2), efficientnet 1.1.1, NumPy 1.26.4, pandas 2.2.3, librosa 0.10.1, setuptools < 81 | EfficientNet-B0 baseline (supplementary) |
 
-The package lists are in `requirements.txt` (reference), `requirements_effnet.txt` (EfficientNet-B0) and `setup_torch_env.sh` (PyTorch). The exact versions installed for each archived run are recorded in `results/runs/<run>/env/pip_freeze.txt`, together with the GPU and driver details in `env/nvidia_smi.txt`.
+The package lists are in `setup/requirements.txt` (reference), `setup/requirements_effnet.txt` (EfficientNet-B0) and `setup/setup_torch_env.sh` (PyTorch). The exact versions installed for each archived run are recorded in `results/runs/<run>/env/pip_freeze.txt`, together with the GPU and driver details in `env/nvidia_smi.txt`.
 
 Other one-time downloads made by the setup scripts:
 
-- ImageNet weights for EfficientNet-B0 (AutoAugment version), saved to `$HMS_PROJECT_DIR/pretrained/` by `setup_effnet_env.sh`.
-- ImageNet weights for timm's `efficientnet_b0`, cached by `setup_torch_env.sh`. These are used only by HemiWave's early image-map variants (Fig. 2, iteration 1), not by the final model.
+- ImageNet weights for EfficientNet-B0 (AutoAugment version), saved to `$HMS_PROJECT_DIR/pretrained/` by `setup/setup_effnet_env.sh`.
+- ImageNet weights for timm's `efficientnet_b0`, cached by `setup/setup_torch_env.sh`. These are used only by HemiWave's early image-map variants (Fig. 2, iteration 1), not by the final model.
 
 ### Data access
 
@@ -96,7 +103,7 @@ The dataset is downloaded with the Kaggle command-line tool, which is installed 
 1. Create an API token (Kaggle → Settings → API → Create New Token) and save it as `~/.kaggle/kaggle.json`.
 2. Run `chmod 600 ~/.kaggle/kaggle.json`. **Never commit this file**; `.gitignore` excludes it.
 3. Accept the rules of the HMS Harmful Brain Activity Classification dataset on its page.
-4. Run `./download_data.sh`. It downloads the 20 GB archive and extracts `train.csv`, `train_eegs/`, `test.csv` and `test_eegs/` into `$HMS_PROJECT_DIR/hms-data/`. Set `KEEP_SPEC=1` to also extract the spectrograms, which only the EfficientNet-B0 baseline needs.
+4. Run `./setup/download_data.sh`. It downloads the 20 GB archive and extracts `train.csv`, `train_eegs/`, `test.csv` and `test_eegs/` into `$HMS_PROJECT_DIR/hms-data/`. Set `KEEP_SPEC=1` to also extract the spectrograms, which only the EfficientNet-B0 baseline needs.
 
 ### Directory layout at run time
 
@@ -105,7 +112,7 @@ Code stays in this repository; everything large is written to the project direct
 ```
 $HMS_PROJECT_DIR (default ~/hms)
 ├── .venv/, .venv-torch/, .venv-tf215/   Python environments
-├── hms-data/                           raw data (download_data.sh)
+├── hms-data/                           raw data (setup/download_data.sh)
 ├── eeg_cache_v2/                       18-channel bipolar, filtered EEGs, one .npy per recording (built by the reference notebook)
 ├── pretrained/                         ImageNet weights for the EfficientNet-B0 baseline
 ├── fair_comparison/<run>/              out-of-fold predictions of each run
@@ -122,47 +129,46 @@ git clone <repo-url> ~/hemiwave-hms && cd ~/hemiwave-hms
 export HMS_PROJECT_DIR=~/hms
 
 # 1. Environments (each script checks that the GPU is visible) and data
-./setup.sh                  # .venv, kernel hms-vipeegnet
-./setup_torch_env.sh        # .venv-torch, kernel hms-torch
-./setup_effnet_env.sh       # .venv-tf215, kernel hms-effnet (only for the EfficientNet-B0 baseline)
-./download_data.sh
+./setup/setup.sh                  # .venv, kernel hms-vipeegnet
+./setup/setup_torch_env.sh        # .venv-torch, kernel hms-torch
+./setup/setup_effnet_env.sh       # .venv-tf215, kernel hms-effnet (only for the EfficientNet-B0 baseline)
+./setup/download_data.sh
 
-# 2. Put the notebooks and helpers where the run scripts expect them
-cp *.ipynb *.py "$HMS_PROJECT_DIR"/
-mkdir -p "$HMS_PROJECT_DIR/results" && cp load_results.py "$HMS_PROJECT_DIR/results/"
+# 2. Put the notebooks and modules where the run scripts expect them (repeat after any edit)
+./sync_to_project.sh
 
 # 3. Reference classifier: seed 2024 (several hours; also builds eeg_cache_v2), then archive it
-./run_vipeegnet.sh smoke    # optional 10-15 min check
-./run_vipeegnet.sh full
-./archive_vipeegnet.sh      # -> results/vipeegnet_groupkfold_v1 (patient folds used by every other model)
+./reference/run_vipeegnet.sh smoke    # optional 10-15 min check
+./reference/run_vipeegnet.sh full
+./tools/archive_vipeegnet.sh          # -> results/vipeegnet_groupkfold_v1 (patient folds used by every other model)
 
-# 4. Two more reference seeds (several hours each), archived with archive_run.sh
-./run_vipeegnet.sh seed 2025
-./run_vipeegnet.sh seed 2026
+# 4. Two more reference seeds (several hours each), archived with tools/archive_run.sh
+./reference/run_vipeegnet.sh seed 2025
+./reference/run_vipeegnet.sh seed 2026
 
 # 5. HemiWave: fold-0 development runs (paper Fig. 2), then the final 5-fold model (~1.5 h)
-./run_prism.sh screen && ./run_prism.sh screen3 && ./run_prism.sh screen4
-./run_prism.sh full5
-./archive_run.sh prism_wf5_v1 ~/hms/fair_comparison/prism_wf5 ~/hms/prism/output_prism_wf5 ~/hms/.venv-torch prism_wf5 PRISM_EEG.ipynb
-./archive_run.sh prism_wf5_tta_v1 ~/hms/fair_comparison/prism_wf5_tta ~/hms/prism/output_prism_wf5 ~/hms/.venv-torch prism_wf5 PRISM_EEG.ipynb
+./hemiwave/run_prism.sh screen && ./hemiwave/run_prism.sh screen3 && ./hemiwave/run_prism.sh screen4
+./hemiwave/run_prism.sh full5
+./tools/archive_run.sh prism_wf5_v1 ~/hms/fair_comparison/prism_wf5 ~/hms/prism/output_prism_wf5 ~/hms/.venv-torch prism_wf5 PRISM_EEG.ipynb
+./tools/archive_run.sh prism_wf5_tta_v1 ~/hms/fair_comparison/prism_wf5_tta ~/hms/prism/output_prism_wf5 ~/hms/.venv-torch prism_wf5 PRISM_EEG.ipynb
 
 # 6. Optional EfficientNet-B0 baseline
-./run_effnet.sh native      # archive command: see the header of archive_run.sh
+./baselines/effnetb0/run_effnet.sh native   # archive command: see the header of tools/archive_run.sh
 
 # 7. Ensemble and evaluation (PyTorch environment)
 source "$HMS_PROJECT_DIR/.venv-torch/bin/activate"
-python blend_5fold.py prism_wf5_tta blend_vip_prism_wf5
+python ensemble/blend_5fold.py prism_wf5_tta blend_vip_prism_wf5
 cd "$HMS_PROJECT_DIR"
 papermill full_comparison.ipynb runs/full_comparison.ipynb -k hms-torch -p PROJECT_DIR "$HMS_PROJECT_DIR"
 ```
 
-`eval_top10.ipynb`, `eval_extended.ipynb` and `compare_all_models.ipynb` run the same way. `full_comparison.ipynb` produces the numbers reported in the paper.
+`evaluation/eval_top10.ipynb`, `eval_extended.ipynb` and `compare_all_models.ipynb` run the same way once synced. `full_comparison.ipynb` produces the numbers reported in the paper.
 
 Approximate run times on the RTX A6000: reference model, several hours per seed; HemiWave, about 16 minutes per fold (1.5 h for five folds); each evaluation notebook, a few minutes.
 
 ## Data
 
-The EEG recordings and expert votes come from the public Harmful Brain Activity Classification dataset collected at Massachusetts General Hospital (Jing et al., *Neurology* 100(17), 2023). The data are not included in this repository; `download_data.sh` fetches them. Recordings are converted to an 18-channel bipolar montage, clipped to ±1024 µV and band-pass filtered at 0.5–45 Hz.
+The EEG recordings and expert votes come from the public Harmful Brain Activity Classification dataset collected at Massachusetts General Hospital (Jing et al., *Neurology* 100(17), 2023). The data are not included in this repository; `setup/download_data.sh` fetches them. Recordings are converted to an 18-channel bipolar montage, clipped to ±1024 µV and band-pass filtered at 0.5–45 Hz.
 
 ## Acknowledgements
 

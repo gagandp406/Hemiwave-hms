@@ -19,7 +19,7 @@ cp "$WD"/*.png "$WD"/*_log.csv "$A/logs/" 2>/dev/null || true
 cp "$(ls -t "$P"/runs/${RUNP}_*.ipynb | head -1)" "$A/logs/executed_run.ipynb"
 cp "$(ls -t "$P"/runs/${RUNP}_*.log   | head -1)" "$A/logs/run.log"
 cp "$P/$NB" "$A/code/"
-HERE="$(cd "$(dirname "$0")" && pwd)"; cp "$HERE"/*.sh "$HERE"/*.py "$HERE"/requirements*.txt "$A/code/" 2>/dev/null || true
+R="$(cd "$(dirname "$0")/.." && pwd)"; (cd "$R" && find setup hemiwave reference baselines ensemble evaluation tools -type f \( -name "*.sh" -o -name "*.py" -o -name "*.ipynb" -o -name "requirements*.txt" \) -exec cp --parents {} "$A/code/" \;) 2>/dev/null || true
 pip freeze > "$A/env/pip_freeze.txt"; nvidia-smi > "$A/env/nvidia_smi.txt"
 sha256sum "$P/hms-data/train.csv" > "$A/env/train_csv.sha256"
 python - "$A" "$TAG" <<'PY'
